@@ -126,7 +126,7 @@ export default function LoginTemplate() {
             )}
           </button>
         </form>
-
+       {/* 
         <div className="mt-8 border-t-4 border-black pt-6 text-center">
           <p className="text-xs font-black uppercase tracking-wider">
             ¿No tienes cuenta? <br className="md:hidden" />
@@ -135,6 +135,8 @@ export default function LoginTemplate() {
             </a>
           </p>
         </div>
+      */}
+
       </section>
     </main>
   );
