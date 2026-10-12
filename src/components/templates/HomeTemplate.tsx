@@ -79,7 +79,7 @@ export default function HomeTemplate() {
       </div>
 
       {/* Cuadrícula de Módulos */}
-      <div className=" mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+      <div className="mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
         {modules.map((module, index) => (
           <Link 
             key={index} 

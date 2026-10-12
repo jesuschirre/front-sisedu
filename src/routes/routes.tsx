@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route } from "react-router-dom";
 
 import Login from "../pages/login";
 import DashboardLayoutPEr from "../components/templates/personas/DashboardLayoutPer";
@@ -27,52 +27,56 @@ import HomeCaAsi from "../components/templates/calificacionesAsistencias/HomeCaA
 import Asistencias from "../pages/asistencias/Asistencias";
 import Calificaciones from "../pages/calificaciones/Calificaciones";
 import ProtectedRoute from "../hooks/protectRoute";
+import { useAuth } from "../context/AuthContext";
 
 export default function Routers() {
+  const { usuario } = useAuth();
+  const isDemoUser = usuario?.username === "demo";
+
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route element={<ProtectedRoute />}>
-      <Route path="/" element={<Home/>} />
-      
-      <Route path="/people" element={<DashboardLayoutPEr />}>
-          <Route index element={<HomePer/>} />
-          <Route path="/people/user" element= {<Users/>}/>
-          <Route path="/people/student" element= {<Students/>} />
-          <Route path="/people/teacher" element= {<Teacher/>} />
-          <Route path="/people/parents" element= {<Parent/>} />
-          <Route path="/people/staff" element= {<Staff/>} />
-      </Route>
-      
-      <Route path="/configuration" element={<DashboardLayoutCon/>}>
-          
-      </Route>
-      
-      <Route path="/permissions" element={<DashboardLayoutPermi/>}>
-          <Route index element={<HomePermi/>}/>
-          <Route path="/permissions/rol" element={<Roles/>}/>
-      </Route>
+        <Route path="/" element={<Home />} />
 
-      <Route path="/academic" element={<DashboardEstructuraEdu/>}>
-          <Route index element={<HomeEstructuraEdu/>}/>
-          <Route path="/academic/level" element={<Levels/>}/>
-          <Route path="/academic/degrees" element={<Degrees/>}/>
-          <Route path= "/academic/academicperiod" element={<AcademicPeriods/>}/>
-          <Route path= "/academic/curses" element={<Curses/>}/>
-      </Route>
-      
-      <Route path="/enrollment" element={<DashMatri/>}>
-          <Route index element={<HomeMatri/>}/>
-          <Route path="/enrollment/matricula" element={<Matricula/>}/>
-      </Route>
+        <Route path="/people" element={<DashboardLayoutPEr />}>
+          <Route index element={<HomePer />} />
+          <Route path="/people/user" element={<Users />} />
+          <Route path="/people/student" element={<Students />} />
+          <Route path="/people/teacher" element={<Teacher />} />
+          <Route path="/people/parents" element={<Parent />} />
+          <Route path="/people/staff" element={<Staff />} />
+        </Route>
 
-      <Route path="/grades" element={<DashCalAsis/>}>
-          <Route index element={<HomeCaAsi/>}/>
-          <Route path="/grades/asistencia" element={<Asistencias/>}/>
-          <Route path="/grades/calificacion" element={<Calificaciones/>}/>
-      </Route>
-      </Route>
+        <Route
+          path="/configuration"
+          element={isDemoUser ? <Navigate to="/" replace /> : <DashboardLayoutCon />}
+        />
 
+        <Route path="/permissions" element={<DashboardLayoutPermi />}>
+          <Route index element={<HomePermi />} />
+          <Route path="/permissions/rol" element={<Roles />} />
+        </Route>
+
+        <Route path="/academic" element={<DashboardEstructuraEdu />}>
+          <Route index element={<HomeEstructuraEdu />} />
+          <Route path="/academic/level" element={<Levels />} />
+          <Route path="/academic/degrees" element={<Degrees />} />
+          <Route path="/academic/academicperiod" element={<AcademicPeriods />} />
+          <Route path="/academic/curses" element={<Curses />} />
+        </Route>
+
+        <Route path="/enrollment" element={<DashMatri />}>
+          <Route index element={<HomeMatri />} />
+          <Route path="/enrollment/matricula" element={<Matricula />} />
+        </Route>
+
+        <Route path="/grades" element={<DashCalAsis />}>
+          <Route index element={<HomeCaAsi />} />
+          <Route path="/grades/asistencia" element={<Asistencias />} />
+          <Route path="/grades/calificacion" element={<Calificaciones />} />
+        </Route>
+      </Route>
     </Routes>
   );
 }

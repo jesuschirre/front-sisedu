@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AlertCircle, Loader2, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -15,6 +15,11 @@ export default function LoginTemplate() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    setUsername("demo")
+    setPassword('demo123')
+  }, []) 
+  
   const inputStyles = `
     w-full border-4 border-black bg-white px-4 py-3 text-sm md:text-base
     font-bold text-black outline-none transition-all duration-200
